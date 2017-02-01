@@ -2,6 +2,7 @@ package antonio.paneladmin;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,6 +38,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.insertar:
+                Intent paso = new Intent(this, Insertar.class);
+                startActivity(paso);
                 break;
             case R.id.borrar:
                 break;
