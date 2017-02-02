@@ -18,7 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2">
+        android:layout_weight="3">
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,6 +32,12 @@
             android:layout_weight="1"
             android:id="@+id/tableArticulos"
             android:text="ARTICULOS"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/atras"
+            android:text="ATRAS"/>
 
     </LinearLayout>
     <LinearLayout
@@ -41,6 +47,17 @@
         android:orientation="vertical"
         android:id="@+id/panelData">
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3.2">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Insertar"
+                android:id="@+id/insertar"/>
+        </LinearLayout>
 
 
     </LinearLayout>

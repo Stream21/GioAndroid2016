@@ -39,6 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.insertar:
                 Intent paso = new Intent(this, Insertar.class);
                 startActivity(paso);
+                this.finish();
                 break;
             case R.id.borrar:
                 break;
