@@ -88,36 +88,41 @@ public class Insertar extends AppCompatActivity implements View.OnClickListener 
 
                 break;
             case R.id.tableArticulos:
+                tablas.removeAllViews();
                 LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 params2.weight=1.0f;
-                tablas.removeAllViews();
 
                 TextView labelSku = new TextView(this);
                 labelSku.setLayoutParams(params2);
                 labelSku.setText("SKU");
+                labelSku.setGravity(Gravity.CENTER);
                 tablas.addView(labelSku);
 
 
                 TextView labelName = new TextView(this);
                 labelName.setLayoutParams(params2);
                 labelName.setText("NOMBRE");
-                tablas.addView(labelSku);
+                labelName.setGravity(Gravity.CENTER);
+                tablas.addView(labelName);
 
                 TextView labelImg = new TextView(this);
                 labelImg.setLayoutParams(params2);
                 labelImg.setText("RUTA IMAGEN");
+                labelImg.setGravity(Gravity.CENTER);
                 tablas.addView(labelImg);
 
 
                 TextView labelPrecio = new TextView(this);
                 labelPrecio.setLayoutParams(params2);
                 labelPrecio.setText("PRECIO");
-                tablas.addView(labelImg);
+                labelPrecio.setGravity(Gravity.CENTER);
+                tablas.addView(labelPrecio);
 
                 TextView labelStock = new TextView(this);
                 labelStock.setLayoutParams(params2);
                 labelImg.setText("DISPONIBLES");
-                tablas.addView(labelImg);
+                labelStock.setGravity(Gravity.CENTER);
+                tablas.addView(labelStock);
 
                 break;
             case R.id.insertar:
