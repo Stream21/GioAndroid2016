@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -12,14 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.R.attr.id;
-import static android.R.attr.text;
-
 
 public class Insertar extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout tablas;
     private Button insertar,usuario,articulos,atras;
     private BDHelper bd;
+    private int swap = 3;
     private EditText textId, textNombre, textPassword;
     private EditText textSku, textName, textImg, textPrecio,textStock;
     @Override
@@ -44,9 +43,11 @@ public class Insertar extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tableUser:
+                tablas.removeAllViews();
                 usuario.setEnabled(false);
                 articulos.setEnabled(true);
-                tablas.removeAllViews();
+                swap = 1;
+
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 params.weight=1.0f;
 
@@ -82,12 +83,12 @@ public class Insertar extends AppCompatActivity implements View.OnClickListener 
                 textPassword.setGravity(Gravity.CENTER);
                 textPassword.setLayoutParams(params);
                 tablas.addView(textPassword);
-
                 break;
             case R.id.tableArticulos:
+                tablas.removeAllViews();
                 usuario.setEnabled(true);
                 articulos.setEnabled(false);
-                tablas.removeAllViews();
+                swap =2;
                 LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 params2.weight=1.0f;
 
@@ -148,19 +149,17 @@ public class Insertar extends AppCompatActivity implements View.OnClickListener 
                 textStock.setGravity(Gravity.CENTER);
                 textStock.setLayoutParams(params2);
                 tablas.addView(textStock);
-
-
                 break;
             case R.id.insertar:
                SQLiteDatabase sql = bd.getWritableDatabase();
-
-                if(articulos.isActivated()==true){
-                    long rst =  bd.insertarUsuarios(sql,Integer.parseInt(textId.getText().toString()),textNombre.getText().toString(), textPassword.getText().toString());
+                if(swap == 1){
+                    bd.insertarUsuarios(sql,Integer.parseInt(textId.getText().toString()),textNombre.getText().toString(), textPassword.getText().toString());
                     Toast.makeText(this, "Registro introducido en la tabla Usuarios con exito", Toast.LENGTH_SHORT).show();
                 }else{
-                    long rst2 =  bd.insertarArticulos(sql,Integer.parseInt(textSku.getText().toString()),textName.getText().toString(), textImg.getText().toString(), Double.parseDouble(textPrecio.getText().toString()),Integer.parseInt(textStock.getText().toString()));
+                    bd.insertarArticulos(sql,Integer.parseInt(textSku.getText().toString()),textName.getText().toString(), textImg.getText().toString(), Double.parseDouble(textPrecio.getText().toString()),Integer.parseInt(textStock.getText().toString()));
                     Toast.makeText(this, "Registro introducido en la tabla Articulos con exito", Toast.LENGTH_SHORT).show();
                 }
+                break;
             case R.id.atras:
                 Intent back = new Intent(this,MainActivity.class);
                 startActivity(back);

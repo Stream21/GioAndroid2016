@@ -21,6 +21,7 @@ public class BDHelper extends SQLiteOpenHelper {
 
         sql.execSQL(DATABASE_CREATE_USUARIOS);
         sql.execSQL(DATABASE_CREATE_ARTICULOS);
+        long p = insertarUsuarios(sql,101,"root","root");
 
     }
 
