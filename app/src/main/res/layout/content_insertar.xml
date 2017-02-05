@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="antonio.paneladmin.Insertar"
-    tools:showIn="@layout/activity_insertar">
+    tools:showIn="@layout/activity_insertar"
+    android:background="@drawable/font">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3">
+        android:layout_weight="2.2">
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,12 +43,42 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/panelData">
     </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3.2">
+            android:layout_weight="2"
+            android:id="@+id/vistaImg"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/infoSpinner"
+                >
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:id="@+id/preview"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.2">
 
             <Button
                 android:layout_width="match_parent"
