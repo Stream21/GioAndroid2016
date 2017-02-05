@@ -17,9 +17,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class BorrarRegistro extends AppCompatActivity implements View.OnClickListener {
+public class BorrarRegistro extends AppCompatActivity implements View.OnClickListener, ConfirmarDelete.OnSimpleDialogListener{
     private Button bArticulos, bUsuarios, bAtras, bSalir;
+    private int miga = 0;
     private static String result[][];
+    private String [] dateId;
+    private String [] dateSku;
     private String [][]result2;
     private static ListView listDates;
     private BDHelper abd;
@@ -85,6 +88,7 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
         }
 
         public void cargarUsuarios() {
+            miga = 1;
             ArrayList<Lista_entrada> userArray = new ArrayList<Lista_entrada>();
             abd = new BDHelper(this);
             db = abd.getWritableDatabase();
@@ -134,24 +138,17 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
             listDates.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+                    dateId = new String[]{result[posicion][0]};
                     ConfirmarDelete cd = new ConfirmarDelete();
-                    cd.show(getFragmentManager(), "Diag");
-                    
-
+                    cd.show(getSupportFragmentManager(), "SimpleDialog");
                     Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion);
-
-                    String [] dateId = new String[]{result[posicion][0]};
-                    db.execSQL("DELETE FROM usuario WHERE id=?", dateId);
-                    db.close();
-                    abd.close();
-                    cargarUsuarios();
-                    Toast.makeText(BorrarRegistro.this, "BORRADO", Toast.LENGTH_SHORT).show();
 
                 }
             });
 
         }
     public void cargarArticulo() {
+        miga = 2;
         ArrayList<ArticulosAdapter> p2 = new ArrayList<ArticulosAdapter>();
         abd = new BDHelper(this);
         db = abd.getWritableDatabase();
@@ -173,7 +170,6 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
                 String stock = c.getString(4);
 
                 int resID = getResources().getIdentifier(ruta, "drawable", getPackageName());
-                Toast.makeText(this, String.valueOf(resID), Toast.LENGTH_SHORT).show();
                 p2.add(new ArticulosAdapter(resID, nombre, precio, stock));
                 i++;
             } while (c.moveToNext());
@@ -206,18 +202,42 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
         listDates.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-                ArticulosAdapter elegido2 = (ArticulosAdapter) pariente.getItemAtPosition(posicion);
+                dateSku = new String[]{result2[posicion][0]};
+                ConfirmarDelete cd = new ConfirmarDelete();
+                cd.show(getSupportFragmentManager(), "SimpleDialog");
 
-                String [] dateId = new String[]{result2[posicion][0]};
-                db.execSQL("DELETE FROM articulo WHERE sku=?", dateId);
-                db.close();
-                abd.close();
-                cargarArticulo();
-                Toast.makeText(BorrarRegistro.this, "BORRADO", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+
+    }
+
+    @Override
+    public void onPossitiveButtonClick() {
+        if(miga == 1) {
+            db.execSQL("DELETE FROM usuario WHERE id=?", dateId);
+            db.close();
+            abd.close();
+            cargarUsuarios();
+            Toast.makeText(BorrarRegistro.this, "BORRADO", Toast.LENGTH_SHORT).show();
+        }else if(miga ==2){
+            db.execSQL("DELETE FROM articulo WHERE sku=?", dateSku);
+            db.close();
+            abd.close();
+            cargarArticulo();
+            Toast.makeText(BorrarRegistro.this, "BORRADO", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Vete a saber de donde vienes", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onNegativeButtonClick() {
+        if(miga==1)
+        cargarUsuarios();
+        else if (miga==2)
+                cargarArticulo();
 
     }
 }

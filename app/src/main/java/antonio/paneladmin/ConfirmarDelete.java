@@ -1,43 +1,67 @@
 package antonio.paneladmin;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 
 /**
- * Created by Antonio on 05/02/2017.
+ * Fragmento con diálogo básico
  */
-
 public class ConfirmarDelete extends DialogFragment {
-private String registro;
-    private BDHelper db;
+    private OnSimpleDialogListener listener;
+
+    public ConfirmarDelete() {
+    }
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Deseas Borrar este usuario de la faz de la tierra?")
-                .setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+        return createSimpleDialog();
+    }
 
-                    }
-                })
-                .setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-                });
-        // Create the AlertDialog object and return it
+    public AlertDialog createSimpleDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle("Titulo")
+                .setMessage("Estas Seguro Que Deseas Eliminar Este Registro De La Base De Datos?")
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                listener.onPossitiveButtonClick();
+                            }
+                        })
+                .setNegativeButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                listener.onNegativeButtonClick();
+                            }
+                        });
+
         return builder.create();
     }
-
-    public String getRegistro() {
-        return registro;
+    public interface OnSimpleDialogListener {
+        void onPossitiveButtonClick();
+        void onNegativeButtonClick();
     }
 
-    public void setRegistro(String registro) {
-        this.registro = registro;
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            listener = (OnSimpleDialogListener) activity;
+
+        } catch (ClassCastException e) {
+            throw new ClassCastException(
+                    activity.toString() +
+                            " no implementó OnSimpleDialogListener");
+
+        }
     }
 }
