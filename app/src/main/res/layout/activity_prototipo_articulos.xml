@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView_imagen"
+        android:id="@+id/imageView_Articulo_imagen"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="50dp"
@@ -26,7 +26,7 @@
         android:layout_marginBottom="5dp">
 
         <TextView
-            android:id="@+id/textView_superior"
+            android:id="@+id/textView_Articulo_superior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -35,14 +35,14 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/textView_inferior"
+            android:id="@+id/textView_Articulo_inferior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall" />
         <TextView
-            android:id="@+id/textView_inferior2"
+            android:id="@+id/textView_Articulo_inferior2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

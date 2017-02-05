@@ -21,6 +21,7 @@ public class Insertar extends AppCompatActivity implements View.OnClickListener 
     private int swap = 3;
     private EditText textId, textNombre, textPassword;
     private EditText textSku, textName, textImg, textPrecio,textStock;
+    private Bundle datosConexion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,8 @@ public class Insertar extends AppCompatActivity implements View.OnClickListener 
         insertar.setOnClickListener(this);
         usuario.setOnClickListener(this);
         articulos.setOnClickListener(this);
+
+        datosConexion = getIntent().getExtras();
     }
 
     @Override
@@ -162,6 +165,7 @@ public class Insertar extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.atras:
                 Intent back = new Intent(this,MainActivity.class);
+                back.putExtras(datosConexion);
                 startActivity(back);
                 this.finish();
             default:
