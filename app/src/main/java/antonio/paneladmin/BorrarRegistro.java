@@ -88,7 +88,11 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /*
+    Este método tiene un parcheado provisional para poder cargar las fotos de usuario de forma dinámica por tiempo.
+     */
     public void cargarUsuarios() {
+        int r = 0;
         miga = 1;
         ArrayList<Lista_entrada> userArray = new ArrayList<Lista_entrada>();
         abd = new BDHelper(this);
@@ -113,8 +117,14 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
                 result[i][0] = id;
                 result[i][1] = nombre;
                 result[i][2] = password;
-                userArray.add(new Lista_entrada(R.drawable.foto, result[i][1], result[i][2]));
+                if (r == 1){
+                    userArray.add(new Lista_entrada(R.drawable.arnaudis, result[i][1], result[i][2]));
+                }else{
+                    userArray.add(new Lista_entrada(R.drawable.foto, result[i][1], result[i][2]));
+                }
+
                 i++;
+                r++;
             } while (c.moveToNext());
         }
 
