@@ -9,9 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Loggin"
+            android:name=".Intro"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".BorrarRegistro" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".PrototipoArticulos"></activity>
+        <activity android:name=".PrototipoArticulos" />
+        <activity android:name=".media" />
+        <activity android:name=".Loggin"></activity>
     </application>
 
 </manifest>

@@ -66,4 +66,8 @@ public class ConfirmarDelete extends DialogFragment {
 
         }
     }
+
+    public void onBackPressed() {
+
+    }
 }

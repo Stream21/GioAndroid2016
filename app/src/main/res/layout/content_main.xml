@@ -99,6 +99,7 @@
                android:id="@+id/salir"
                android:gravity="center"
                android:text="SALIR DE LA APP"/>
+
        </LinearLayout>
 
    </LinearLayout>

@@ -3,16 +3,12 @@ package antonio.paneladmin;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.File;
 
 public class Loggin extends AppCompatActivity implements View.OnClickListener {
     private EditText userLog, passLog;
@@ -54,6 +50,9 @@ public class Loggin extends AppCompatActivity implements View.OnClickListener {
             case R.id.loguear:
                 bd = new BDHelper(this);
                 sql = bd.getWritableDatabase();
+                bd.insertarUsuarios(sql, 100, "Antonio", "123456");
+                bd.insertarUsuarios(sql, 100, "Arnaudis", "kaka");
+
 
                 String[] datos = new String[]{"nombre", "clave"};
                 Cursor c = sql.query("usuario", datos, null, null, null, null, null);
@@ -90,4 +89,7 @@ public class Loggin extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    public void onBackPressed() {
+
+    }
 }

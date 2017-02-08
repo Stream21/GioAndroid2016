@@ -58,11 +58,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.insertar:
                 startActivity(paso);
-                this.finish();
+                finish();
                 break;
             case R.id.borrar:
                 startActivity(paso2);
-                this.finish();
+                finish();
                 break;
             case R.id.modificar:
                 break;
@@ -70,5 +70,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 this.finish();
                 break;
         }
+    }
+
+    public void onBackPressed() {
+
     }
 }

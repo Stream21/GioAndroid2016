@@ -3,17 +3,15 @@ package antonio.paneladmin;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import java.util.ArrayList;
 
@@ -28,7 +26,6 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
     private BDHelper abd;
     private SQLiteDatabase db;
     private Bundle datosConexion;
-    private static int indicador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +49,6 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
         bAtras.setOnClickListener(this);
         bSalir.setOnClickListener(this);
 
-        //Eventos Del ListView
-        listDates.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                indicador = position;
-
-            }
-        });
-
     }
 
     @Override
@@ -69,7 +57,7 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
             case R.id.bUsuarios:
                 bUsuarios.setEnabled(false);
                 bArticulos.setEnabled(true);
-                cargarUsuarios();
+                this.cargarUsuarios();
                 break;
             case R.id.bArticulos:
                 bUsuarios.setEnabled(true);
@@ -83,7 +71,7 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
                 this.finish();
                 break;
             case R.id.bSalir:
-                this.finish();
+                finish();
                 break;
         }
     }
@@ -94,7 +82,7 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
     public void cargarUsuarios() {
         int r = 0;
         miga = 1;
-        ArrayList<Lista_entrada> userArray = new ArrayList<Lista_entrada>();
+        ArrayList<Lista_entrada> userArray = new ArrayList<>();
         abd = new BDHelper(this);
         db = abd.getWritableDatabase();
 
@@ -126,6 +114,7 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
                 i++;
                 r++;
             } while (c.moveToNext());
+            c.close();
         }
 
         listDates.setAdapter(new Lista_adaptador(this, R.layout.entrada, userArray) {
@@ -250,6 +239,10 @@ public class BorrarRegistro extends AppCompatActivity implements View.OnClickLis
             cargarUsuarios();
         else if (miga == 2)
             cargarArticulo();
+
+    }
+
+    public void onBackPressed() {
 
     }
 }
